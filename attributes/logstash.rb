@@ -46,3 +46,23 @@ default_unless['elkstack']['config']['custom_logstash']['name'] = []
 # default['elkstack']['config']['custom_logstash'][<name>]['source'] = 'my_logstashconfig.conf.erb'
 # default['elkstack']['config']['custom_logstash'][<name>]['cookbook'] = 'your_cookbook'
 # default['elkstack']['config']['custom_logstash'][<name>]['variables'] = { :warning => 'foo' }
+
+default['elkstack']['config']['logstash']['templates'] = {
+  'input_syslog'         => 'logstash/input_syslog.conf.erb',
+  'input_tcp'            => 'logstash/input_tcp.conf.erb',
+  'input_udp'            => 'logstash/input_udp.conf.erb',
+  'output_stdout'        => 'logstash/output_stdout.conf.erb',
+  'output_elasticsearch' => 'logstash/output_elasticsearch.conf.erb'
+}
+
+default['elkstack']['config']['logstash']['template_variables'] = {
+  input_lumberjack_host: '0.0.0.0',
+  input_lumberjack_port: 5960,
+  input_syslog_host: '0.0.0.0',
+  input_syslog_port: 5959,
+  input_tcp_host: '0.0.0.0',
+  input_tcp_port: 5961,
+  input_udp_host: '0.0.0.0',
+  input_udp_port: 5962,
+  chef_environment: node.chef_environment
+}

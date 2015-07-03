@@ -28,25 +28,8 @@ end
 
 # by default, these are the inputs and outputs on the server
 # we receive anything from any protocol we might know about
-my_templates = {
-  'input_syslog'         => 'logstash/input_syslog.conf.erb',
-  'input_tcp'            => 'logstash/input_tcp.conf.erb',
-  'input_udp'            => 'logstash/input_udp.conf.erb',
-  'output_stdout'        => 'logstash/output_stdout.conf.erb',
-  'output_elasticsearch' => 'logstash/output_elasticsearch.conf.erb'
-}
-
-template_variables = {
-  input_lumberjack_host: '0.0.0.0',
-  input_lumberjack_port: 5960,
-  input_syslog_host: '0.0.0.0',
-  input_syslog_port: 5959,
-  input_tcp_host: '0.0.0.0',
-  input_tcp_port: 5961,
-  input_udp_host: '0.0.0.0',
-  input_udp_port: 5962,
-  chef_environment: node.chef_environment
-}
+my_templates = node['elkstack']['config']['logstash']['templates']
+template_variables = node['elkstack']['config']['logstash']['template_variables']
 
 # set lumberjack key locations and perms
 node.default['lumberjack']['ssl_dir'] = node['logstash']['instance_default']['basedir']
